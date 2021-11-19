@@ -31,7 +31,6 @@ class MainViewModel(
             //delay to see loading indicator
             delay(2000)
             _resource.value = repository.getAllPlanets()
-            planetAdapter.submitList(_resource.value?.data?.results)
         }
     }
 

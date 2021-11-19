@@ -17,8 +17,10 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels {
-        MainViewModel.Factory(RepositoryImpl(), PlanetAdapter(), NetworkConnection())
+        MainViewModel.Factory(RepositoryImpl(), planetAdapter, NetworkConnection())
     }
+
+    private val planetAdapter by lazy { PlanetAdapter() }
 
     private val loadingDialog = LoadingDialog()
     private val notify = Notify()
@@ -33,6 +35,8 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.resource.observe(this) { resource ->
             resource?.let {
+
+                planetAdapter.submitList(resource.data?.results)
                 showLoader(resource is Resource.Loading)
                 handleError(resource.throwable)
 
