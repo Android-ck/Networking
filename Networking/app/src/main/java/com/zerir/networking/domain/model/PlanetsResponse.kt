@@ -1,7 +1,8 @@
 package com.zerir.networking.domain.model
 
-import com.zerir.networking.domain.model.Planet
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class PlanetsResponse(
     val count: Int = 0,
     val next: String?,

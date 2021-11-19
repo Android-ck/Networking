@@ -1,5 +1,8 @@
 package com.zerir.networking.domain.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Planet(
     val climate: String = "",
     val created: String = "",

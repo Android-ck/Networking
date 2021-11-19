@@ -4,11 +4,12 @@ import com.zerir.networking.domain.Repository
 import com.zerir.networking.domain.model.PlanetsResponse
 import com.zerir.networking.network.AsyncCall
 import com.zerir.networking.network.Resource
+import com.zerir.networking.network.ktor.PlanetApi
 
-class RepositoryImpl : Repository, AsyncCall {
+class RepositoryImpl(private val planetApi: PlanetApi) : Repository, AsyncCall {
 
     override suspend fun getAllPlanets(): Resource<PlanetsResponse> = invokeAsyncCall {
-        TODO("Not yet implemented")
+        planetApi.getPlanets()
     }
 
 }

@@ -10,6 +10,8 @@ import com.zerir.networking.data.RepositoryImpl
 import com.zerir.networking.databinding.ActivityMainBinding
 import com.zerir.networking.network.NetworkConnection
 import com.zerir.networking.network.Resource
+import com.zerir.networking.network.ktor.PlanetApiImpl
+import com.zerir.networking.network.ktor.RemoteDataSource
 import com.zerir.networking.utils.LoadingDialog
 import com.zerir.networking.utils.Notify
 
@@ -17,7 +19,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels {
-        MainViewModel.Factory(RepositoryImpl(), planetAdapter, NetworkConnection())
+        val planetApi = RemoteDataSource().buildApi(PlanetApiImpl::class.java)
+        MainViewModel.Factory(RepositoryImpl(planetApi), planetAdapter, NetworkConnection())
     }
 
     private val planetAdapter by lazy { PlanetAdapter() }
