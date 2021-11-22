@@ -10,7 +10,7 @@ import com.zerir.networking.data.RepositoryImpl
 import com.zerir.networking.databinding.ActivityMainBinding
 import com.zerir.networking.network.NetworkConnection
 import com.zerir.networking.network.Resource
-import com.zerir.networking.network.retrofit.PlanetsApi
+import com.zerir.networking.network.retrofit.PassengersApi
 import com.zerir.networking.network.retrofit.RemoteDataSource
 import com.zerir.networking.utils.LoadingDialog
 import com.zerir.networking.utils.Notify
@@ -19,11 +19,11 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels {
-        val planetsApi = RemoteDataSource().buildApi(PlanetsApi::class.java)
-        MainViewModel.Factory(RepositoryImpl(planetsApi), planetAdapter, NetworkConnection())
+        val planetsApi = RemoteDataSource().buildApi(PassengersApi::class.java)
+        MainViewModel.Factory(RepositoryImpl(planetsApi), passengerAdapter, NetworkConnection())
     }
 
-    private val planetAdapter by lazy { PlanetAdapter() }
+    private val passengerAdapter by lazy { PassengerAdapter() }
 
     private val loadingDialog = LoadingDialog()
     private val notify = Notify()
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.resource.observe(this) { resource ->
             resource?.let {
 
-                planetAdapter.submitList(resource.data?.results)
+                passengerAdapter.submitList(resource.data?.data)
                 showLoader(resource is Resource.Loading)
                 handleError(resource.throwable)
 
