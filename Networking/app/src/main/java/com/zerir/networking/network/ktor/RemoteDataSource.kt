@@ -15,7 +15,7 @@ import io.ktor.http.*
 class RemoteDataSource {
 
     companion object {
-        const val BASE_URL = "https://swapi.dev/api/"
+        const val BASE_URL = "https://api.instantwebtools.net/v1/"
     }
 
     fun <Api: BaseApi> buildApi(api: Class<Api>): Api {
